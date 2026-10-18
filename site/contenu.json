@@ -1,0 +1,47 @@
+{
+  "formspree": "",
+  "realisations": [
+    {
+      "titre": "Aubergines rôties, yaourt & grenade",
+      "label": "végétarien",
+      "categorie": "Semaine",
+      "couleur": "#f4a6b8",
+      "photo": "aubergines"
+    },
+    {
+      "titre": "Poulet citron confit & herbes",
+      "label": "dîner",
+      "categorie": "Dîners",
+      "couleur": "#ffd60a",
+      "photo": "poulet rôti"
+    },
+    {
+      "titre": "Salade de lentilles, feta & menthe",
+      "label": "meal prep",
+      "categorie": "Semaine",
+      "couleur": "#7cc48a",
+      "photo": "salade lentilles"
+    },
+    {
+      "titre": "Shakshuka verte",
+      "label": "brunch",
+      "categorie": "Dîners",
+      "couleur": "#b9d98a",
+      "photo": "shakshuka"
+    },
+    {
+      "titre": "Gâteau polenta, citron & pistache",
+      "label": "dessert",
+      "categorie": "Desserts",
+      "couleur": "#ffe46b",
+      "photo": "gâteau citron"
+    },
+    {
+      "titre": "Riz aux herbes, pois chiches & tahini",
+      "label": "meal prep",
+      "categorie": "Semaine",
+      "couleur": "#f7c59f",
+      "photo": "riz herbes"
+    }
+  ]
+}
