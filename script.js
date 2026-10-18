@@ -16,12 +16,32 @@
   var hLemon = $('hLemon'), hTomato = $('hTomato'), hFig = $('hFig');
   var transRef = $('transRef'), waveFill = $('waveFill'), waveRibbon = $('waveRibbon'), ribbonText = $('ribbonText');
   var rFig = $('rFig'), rPome = $('rPome'), rPepper = $('rPepper');
+  var rdvWave = $('rdvWave'), rdvCurve = $('rdvCurve'), rdvLemon = $('rdvLemon'), rdvLen = 0;
   var mx = 0, my = 0, t = 0;
 
   window.addEventListener('pointermove', function (e) {
     mx = e.clientX / window.innerWidth * 2 - 1;
     my = e.clientY / window.innerHeight * 2 - 1;
   }, { passive: true });
+
+  // Citron qui roule sur la vague noire au-dessus de « Prendre rendez-vous »
+  function updateRdvLemon() {
+    var w = rdvWave, c = rdvCurve, l = rdvLemon; if (!w || !c || !l) return;
+    var rect = w.getBoundingClientRect(), vh = window.innerHeight;
+    var p = Math.min(1, Math.max(0, (vh - rect.top) / (vh * 0.85)));
+    var W = rect.width, H = rect.height, d = l.offsetWidth, r = d / 2;
+    if (!rdvLen) rdvLen = c.getTotalLength();
+    var xv = 1440 * (0.06 + 0.8 * p);
+    var lo = 0, hi = rdvLen;
+    for (var i = 0; i < 18; i++) { var m = (lo + hi) / 2; if (c.getPointAtLength(m).x < xv) lo = m; else hi = m; }
+    var pt = c.getPointAtLength(lo), pt2 = c.getPointAtLength(Math.min(rdvLen, lo + 4));
+    var sx = W / 1440, sy = H / 140;
+    var ang = Math.atan2((pt2.y - pt.y) * sy, (pt2.x - pt.x) * sx);
+    var px = pt.x * sx, py = pt.y * sy;
+    var ox = px + Math.sin(ang) * r, oy = py - Math.cos(ang) * r;
+    var roll = (px / r) * 57.3;
+    l.style.transform = 'translate(' + (ox - r).toFixed(1) + 'px,' + (oy - r + 4).toFixed(1) + 'px) rotate(' + roll.toFixed(1) + 'deg)';
+  }
 
   function updateHero() {
     var hp = Math.min(1, window.scrollY / 700);
@@ -59,7 +79,7 @@
     surf(rPepper, 0.84 - p * 0.08, 108, 124, 20, -10 + Math.sin(t * 0.8) * 8);
   }
 
-  function loop(ms) { t = ms / 1000; updateHero(); updateWave(); requestAnimationFrame(loop); }
+  function loop(ms) { t = ms / 1000; updateHero(); updateWave(); updateRdvLemon(); requestAnimationFrame(loop); }
   requestAnimationFrame(loop);
 
   // --------------------------------------------------------------- réalisations
